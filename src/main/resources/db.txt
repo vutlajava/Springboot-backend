@@ -1,0 +1,6 @@
+#Emloyee table
+
+create table employee_management_system.employees (id bigint not null auto_increment, emailid varchar(255), firstname varchar(255), lastname varchar(255), primary key (id))
+
+INSERT INTO `employee_management_system`.`employees` (`id`, `emailid`, `firstname`, `lastname`) VALUES ('1', 'vutlaak@gmail.com', 'Ashok', 'Kumar');
+INSERT INTO `employee_management_system`.`employees` (`id`, `emailid`, `firstname`, `lastname`) VALUES ('2', 'sahasra@gmail.com', 'Sahasra', 'Aadya');
