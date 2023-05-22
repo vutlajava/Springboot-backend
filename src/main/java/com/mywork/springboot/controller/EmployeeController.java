@@ -1,12 +1,15 @@
 package com.mywork.springboot.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,6 +76,23 @@ public class EmployeeController {
 		existingEmp.setEmailId(employee.getEmailId());
 		
 		return ResponseEntity.ok(employeeRepository.save(existingEmp));
+	}
+	
+	@DeleteMapping("employees/{id}")
+	public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable Long id) {
+		
+		Employee existingEmp = employeeRepository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException(" Record not found "+id));
+		
+		
+		Map<String,Boolean> map = new HashMap<String,Boolean>();
+		
+		employeeRepository.delete(existingEmp);
+		map.put("deleted", Boolean.TRUE);
+		
+		return  ResponseEntity.ok(map);
+		
+		
 	}
 
 }
